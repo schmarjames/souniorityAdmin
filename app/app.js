@@ -3,11 +3,20 @@
  Initialize the Angular App
  **************************/
 
-var app = angular.module("app", ["ngRoute", "ui.router", "ngAnimate", "ui.bootstrap", "easypiechart", "mgo-angular-wizard", "textAngular", "ui.tree", "ngMap", "ngTagsInput", "app.ui.ctrls", "app.ui.services", "app.controllers", "app.directives", "app.form.validation", "app.ui.form.ctrls", "app.ui.form.directives", "app.tables", "app.map", "app.task", "app.chart.ctrls", "app.chart.directives","countTo"]).run(["$rootScope", "$location",
-    function ($rootScope, $location) {
+var app = angular.module("app", [
+    "ngRoute", "ui.router", "ngAnimate", "ui.bootstrap", "easypiechart",
+    "mgo-angular-wizard", "textAngular", "ui.tree", "ngMap", "ngTagsInput",
+    "app.ui.services",
+    "dashboard.service",
+    "app.directives",
+    "app.ui.ctrls",
+    "app.controllers",
+    "dashboard.controller",
+    "app.form.validation", "app.ui.form.ctrls", "app.ui.form.directives", "app.tables", "app.map", "app.task",
+    "app.chart.ctrls", "app.chart.directives","countTo"]).run(["$rootScope", "$location", "$http",
+    function ($rootScope, $location, $http) {
 
         $(document).ready(function(){
-
             setTimeout(function(){
                 $('.page-loading-overlay').addClass("loaded");
                 $('.load_circle_wrapper').addClass("loaded");
@@ -28,7 +37,7 @@ console.log($stateProvider);
 
         .state('admin.dashboard', {
           url: '/dashboard',
-          templateUrl: 'app/views/dashboards/dashboard.html'
+          templateUrl: 'app/views/admin.dashboard.html'
         })
 
         .state('admin.scheduledshows', {
