@@ -144,7 +144,9 @@ module.exports = function(grunt) {
                     'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
                     'scripts/other_charts.js',
                     'scripts/extras.js',
-                    'app/*.js' ],
+                    'app/*.js',
+                    'app/services/*.js',
+                    'app/controller/*.js' ],
                 dest: 'dist/js/app.js'
             }
         },
