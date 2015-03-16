@@ -1,0 +1,43 @@
+
+<!-- Logo -->
+<div class="logo" data-ng-controller="AdminAppCtrl">
+    <a href="#/">
+        <img src="images/logo.png"/>
+        <span>{{info.theme_name}}</span>
+    </a>
+</div>
+<div id="nav-wrapper">
+    <ul id="nav"
+        data-ng-controller="NavCtrl"
+        data-slim-scroll
+        data-collapse-nav
+        data-highlight-active>
+        <li>
+            <a ui-sref="admin.dashboard"> <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+        </li>
+        <li>
+            <a ui-sref="admin.scheduledshows"> <i class="fa fa-table"></i> <span>Scheduled Shows</span></a>
+        </li>
+        <li>
+            <a ui-sref="admin.showhistory"> <i class="fa fa-history"></i> <span>Scheduled History</span></a>
+        </li>
+        <li>
+            <a ui-sref="admin.musicinventory"> <i class="fa fa-archive"></i> <span>Music Inventory</span></a>
+        </li>
+        <li>
+            <a ui-sref="admin.musicmedia"> <i class="fa fa-music"></i> <span>Music Media</span></a>
+        </li>
+        <li>
+            <a href="#/ui"><i class="fa fa-cogs"></i><span>Account Settings</span></a>
+            <ul>
+                <li><a ui-sref="admin.subscription"><i class="fa fa-angle-right"></i><span> Subscription</span></a></span></li>
+                <li><a ui-sref="admin.profile"><i class="fa fa-angle-right"></i><span> Profile</span></a></li>
+                <li><a ui-sref="admin.billing"><i class="fa fa-angle-right"></i><span>Billing </span></a></li>
+            </ul>
+        </li>
+        <li>
+            <a ui-sref="logout"> <i class="fa fa-lock"></i> <span>Log Out</span></a>
+        </li>
+    </ul>
+
+</div>
