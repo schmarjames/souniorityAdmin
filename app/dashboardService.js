@@ -1,8 +1,8 @@
 (function() {
 
-  angular.module('dashboard.service', []).factory('dashboard', ['$http', '$q', dashboard]);
+  angular.module('dashboard.service', []).factory('dashboard', ['$http', '$q', '$timeout', dashboard]);
 
-    function dashboard($http, $q) {
+    function dashboard($http, $q, $timeout) {
       //var url; dashboard service url
       var factory = {
             getMusicData : getMusicData,
@@ -14,12 +14,21 @@
             { name: "What They Say", artist: "Maya Jane Cole", request_amount: 12 },
             { name: "Look Around You", artist: "Chopsticks", request_amount: 8 }
           ],
-          event_data = {},
+          event_data = [],
           guest_data = {};
 
       return factory;
 
-      function getMusicData() {}
+      function getMusicData() {
+        // queue music data
+        var deferred = $q.defer();
+
+        $timeout(function() {
+          deferred.resolve(songs);
+        }, 500);
+
+        return deferred.promise;
+      }
 
       function getEventHistoryData() {}
 
