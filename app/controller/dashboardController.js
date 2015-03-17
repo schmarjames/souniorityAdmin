@@ -3,31 +3,30 @@
   angular.module('dashboard.controller', []).controller('dashbardCtrl', ["$scope", 'dashboard', dashbardCtrl]);
 
   function dashbardCtrl($scope, dashboard) {
-    console.log(dashboard);
 
-    function displayMusicStats() {
-      // get music data from dashboard service
+    var pieColors = ["#383d43", "#db5031", "#c1bfc0"];
 
-      // Display pie chart of music stats
-      return $scope.chartjsPie = [{
-        value: 300,
-        color:"#383d43",
-        highlight: "#383d43",
-        label: "Blue"
-      },
-      {
-          value: 50,
-          color: "#db5031",
-          highlight: "#db5031",
-          label: "Orange"
-      },
-      {
-          value: 100,
-          color: "#c1bfc0",
-          highlight: "#c1bfc0",
-          label: "Gray"
-      }];
-    }
+    $scope.chartjsPie = [];
+
+      dashboard.getMusicData().then(function(data) {
+        chartData = [];
+        i = 0;
+        angular.forEach(data, function(value, key) {
+          obj = {
+            value: value.request_amount,
+            color: pieColors[i],
+            highlight: pieColors[i],
+            label: value.name
+          };
+          chartData.push(obj);
+          i++;
+        });
+
+        $scope.chartjsPie = chartData;
+        console.log($scope.chartjsPie);
+
+        //return $scope.chartjsPie;
+      });
 
     function displayEventHistory() {
       // get data from dashboard service
