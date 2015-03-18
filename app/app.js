@@ -7,11 +7,13 @@ var app = angular.module("app", [
     "ngRoute", "ui.router", "ngAnimate", "ui.bootstrap", "easypiechart",
     "mgo-angular-wizard", "textAngular", "ui.tree", "ngMap", "ngTagsInput",
     "app.ui.services",
+    "general.service",
     "dashboard.service",
     "app.directives",
     "app.ui.ctrls",
     "app.controllers",
     "dashboard.controller",
+    "shows.controller",
     "app.form.validation", "app.ui.form.ctrls", "app.ui.form.directives", "app.tables", "app.map", "app.task",
     "app.chart.ctrls", "app.chart.directives","countTo"]).run(["$rootScope", "$location", "$http",
     function ($rootScope, $location, $http) {
@@ -40,10 +42,20 @@ console.log($stateProvider);
           templateUrl: 'app/views/admin.dashboard.html'
         })
 
+        .state('admin.table', {
+          url: '/table',
+          templateUrl: 'app/views/tables/dynamic.html'
+        })
+
         .state('admin.scheduledshows', {
           url: '/scheduledshows',
           templateUrl: 'app/views/admin.scheduledshows.html'
         })
+
+        .state('admin.showdetails', {
+          url: '/showdetails',
+          templateUrl: 'app/views/admin.showdetails.html'
+        });
 
         .state('admin.showhistory', {
           url: '/showhistory',
