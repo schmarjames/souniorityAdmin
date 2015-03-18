@@ -6,7 +6,24 @@
 
     var pieColors = ["#383d43", "#db5031", "#c1bfc0"];
 
-    $scope.chartjsPie = [];
+    /*$scope.chartjsPie = [{
+      value: 4,
+      color:"#383d43",
+      highlight: "#383d43",
+      label: "Blue"
+    },
+    {
+        value: 12,
+        color: "#db5031",
+        highlight: "#db5031",
+        label: "Orange"
+    },
+    {
+        value: 8,
+        color: "#c1bfc0",
+        highlight: "#c1bfc0",
+        label: "Gray"
+    }];*/
 
       dashboard.getMusicData().then(function(data) {
         chartData = [];
