@@ -1113,7 +1113,8 @@ angular.module("app.ui.form.ctrls", []).controller("TagsDemoCtrl", ["$scope",
         }
     ]).controller("TypeaheadCtrl", ["$scope",
         function($scope) {
-            return $scope.selected = void 0, $scope.states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Dakota", "North Carolina", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
+            return $scope.selected = void 0, $scope.states = ["Alabama",
+            "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Dakota", "North Carolina", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
         }
     ]).controller("RatingDemoCtrl", ["$scope",
         function($scope) {
@@ -1271,22 +1272,39 @@ angular.module("app.tables", []).controller("tableCtrl", ["$scope", "$filter",
             price: "$",
             sales: 82,
             rating: 4.4
-        }], $scope.searchKeywords = "", $scope.filteredStores = [], $scope.row = "", $scope.select = function(page) {
+        }],
+        $scope.searchKeywords = "",
+        $scope.filteredStores = [],
+        $scope.row = "",
+        $scope.select = function(page) {
             var end, start;
             return start = (page - 1) * $scope.numPerPage, end = start + $scope.numPerPage, $scope.currentPageStores = $scope.filteredStores.slice(start, end);
-        }, $scope.onFilterChange = function() {
+        },
+        $scope.onFilterChange = function() {
             return $scope.select(1), $scope.currentPage = 1, $scope.row = "";
-        }, $scope.onNumPerPageChange = function() {
+        },
+        $scope.onNumPerPageChange = function() {
             return $scope.select(1), $scope.currentPage = 1;
-        }, $scope.onOrderChange = function() {
+        },
+        $scope.onOrderChange = function() {
             return $scope.select(1), $scope.currentPage = 1;
-        }, $scope.search = function() {
+        },
+        $scope.search = function() {
+            console.log('searching');
             return $scope.filteredStores = $filter("filter")($scope.stores, $scope.searchKeywords), $scope.onFilterChange();
-        }, $scope.order = function(rowName) {
+        },
+        $scope.order = function(rowName) {
             return $scope.row !== rowName ? ($scope.row = rowName, $scope.filteredStores = $filter("orderBy")($scope.stores, rowName), $scope.onOrderChange()) : void 0;
-        }, $scope.numPerPageOpt = [3, 5, 10, 20], $scope.numPerPage = $scope.numPerPageOpt[2], $scope.currentPage = 1, $scope.currentPageStores = [], (init = function() {
+        },
+        $scope.numPerPageOpt = [3, 5, 10, 20],
+        $scope.numPerPage = $scope.numPerPageOpt[2],
+        $scope.currentPage = 1,
+        $scope.currentPageStores = [],
+        (init = function() {
+            console.log('init');
             return $scope.search(), $scope.select($scope.currentPage);
-        }), $scope.search();
+        }),
+        $scope.search();
     }
 ]);
 
