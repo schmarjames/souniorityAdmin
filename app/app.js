@@ -13,6 +13,8 @@ var app = angular.module("app", [
     "app.ui.ctrls",
     "app.controllers",
     "dashboard.controller",
+    "musicInventory.controller",
+    "musicMedia.controller",
     "shows.controller",
     "app.form.validation", "app.ui.form.ctrls", "app.ui.form.directives", "app.tables", "app.map", "app.task",
     "app.chart.ctrls", "app.chart.directives","countTo"]).run(["$rootScope", "$location", "$http",
@@ -30,7 +32,7 @@ var app = angular.module("app", [
     function($stateProvider, $urlRouterProvider) {
 console.log($stateProvider);
 
-      $urlRouterProvider.otherwise("/dashboard");
+      $urlRouterProvider.otherwise("/admin/dashboard");
       $stateProvider
         .state('admin', {
           url: '/admin',
@@ -39,7 +41,8 @@ console.log($stateProvider);
 
         .state('admin.dashboard', {
           url: '/dashboard',
-          templateUrl: 'app/views/admin.dashboard.html'
+          templateUrl: 'app/views/admin.dashboard.html',
+          controller: 'dashbardCtrl'
         })
 
         .state('admin.table', {
@@ -49,27 +52,31 @@ console.log($stateProvider);
 
         .state('admin.scheduledshows', {
           url: '/scheduledshows',
-          templateUrl: 'app/views/admin.scheduledshows.html'
+          templateUrl: 'app/views/admin.scheduledshows.html',
+          controller: 'showsCtrl'
         })
 
         .state('admin.showdetails', {
           url: '/showdetails',
           templateUrl: 'app/views/admin.showdetails.html'
-        });
+        })
 
         .state('admin.showhistory', {
           url: '/showhistory',
-          templateUrl: 'app/views/admin.showhistory.html'
+          templateUrl: 'app/views/admin.showhistory.html',
+          controller: 'showsCtrl'
         })
 
         .state('admin.musicinventory', {
           url: '/musicinventory',
-          templateUrl: 'app/views/admin.musicinventory.html'
+          templateUrl: 'app/views/admin.musicinventory.html',
+          controller: 'musicInventoryCtrl'
         })
 
         .state('admin.musicmedia', {
           url: '/musicmedia',
-          templateUrl: 'app/views/admin.musicmedia.html'
+          templateUrl: 'app/views/admin.musicmedia.html',
+          controller: 'musicMediaCtrl'
         })
 
         .state('admin.subscription', {
