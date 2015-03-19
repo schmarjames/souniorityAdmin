@@ -1,9 +1,9 @@
 (function() {
 
-  angular.module('shows.controller', []).controller('showsCtrl', ['$scope', '$filter', 'general', showsCtrl]);
+  angular.module('shows.controller', []).controller('showsCtrl', ['$scope', '$filter', '$location', 'general', showsCtrl]);
 
-  function showsCtrl($scope, $filter, general) {
-    var init;
+  function showsCtrl($scope, $filter, $location, general) {
+    var init, query_type;
     $scope.currentPageShows = [];
     $scope.filteredShows = [];
     $scope.searchKeywords = "";
@@ -38,7 +38,10 @@
         return $scope.row !== rowName ? ($scope.row = rowName, $scope.filteredShows = $filter("orderBy")($scope.shows, rowName), $scope.onOrderChange()) : void 0;
     };
 
-    general.getScheduledShows().then(function(data) {
+    // check url to see what type of data we need to query
+    query_type = ($location.$$url.indexOf('showhistory') < 0) ? null : 'previous';
+    
+    general.getScheduledShows(query_type).then(function(data) {
       $scope.shows = data;
       $scope.search();
     });
