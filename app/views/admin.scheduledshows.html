@@ -1,4 +1,4 @@
-<div class="page page-table" data-ng-controller="showsCtrl">
+<div class="page page-table">
 
   <section class="panel panel-default table-dynamic">
     <div class="panel-heading"><strong><i class="fa fa-list panel-ico"></i>Scheduled Shows</strong></div>
@@ -37,29 +37,29 @@
                 <th><div class="th">
                     Date
                     <span class="glyphicon glyphicon-chevron-up"
-                          data-ng-click=" order('price') "
-                          data-ng-class="{active: row == 'price'}"></span>
+                          data-ng-click=" order('date') "
+                          data-ng-class="{active: row == 'date'}"></span>
                     <span class="glyphicon glyphicon-chevron-down"
-                          data-ng-click=" order('-price') "
-                          data-ng-class="{active: row == '-price'}"></span>
+                          data-ng-click=" order('-date') "
+                          data-ng-class="{active: row == '-date'}"></span>
                 </div></th>
                 <th><div class="th">
                     Time
                     <span class="glyphicon glyphicon-chevron-up"
-                          data-ng-click=" order('sales') "
-                          data-ng-class="{active: row == 'sales'}"></span>
+                          data-ng-click=" order('time') "
+                          data-ng-class="{active: row == 'time'}"></span>
                     <span class="glyphicon glyphicon-chevron-down"
-                          data-ng-click=" order('-sales') "
-                          data-ng-class="{active: row == '-sales'}"></span>
+                          data-ng-click=" order('-time') "
+                          data-ng-class="{active: row == '-time'}"></span>
                 </div></th>
                 <th><div class="th">
                     Location
                     <span class="glyphicon glyphicon-chevron-up"
-                          data-ng-click=" order('rating') "
-                          data-ng-class="{active: row == 'rating'}"></span>
+                          data-ng-click=" order('location') "
+                          data-ng-class="{active: row == 'location'}"></span>
                     <span class="glyphicon glyphicon-chevron-down"
-                          data-ng-click=" order('-rating') "
-                          data-ng-class="{active: row == '-rating'}"></span>
+                          data-ng-click=" order('-location') "
+                          data-ng-class="{active: row == '-location'}"></span>
                 </div></th>
                 <th></th>
             </tr>
