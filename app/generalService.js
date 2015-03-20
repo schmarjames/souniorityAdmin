@@ -34,6 +34,9 @@
 
     return factory;
 
+    /*
+     * Table query methods
+     */
     function getScheduledShows(type) {
       // queue show data
       var deferred = $q.defer(),
@@ -70,6 +73,14 @@
 
       return deferred.promise;
     }
+
+    /*
+     * Form post / get methods
+     */
+
+     function addSongToInventory() {
+       
+     }
   }
 
 })();
