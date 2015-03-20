@@ -56,6 +56,12 @@ console.log($stateProvider);
           controller: 'showsCtrl'
         })
 
+        .state('admin.addshow', {
+          url: '/addshow',
+          templateUrl: 'app/views/admin.addshow.html',
+          controller: 'showsCtrl'
+        })
+
         .state('admin.showdetails', {
           url: '/showdetails',
           templateUrl: 'app/views/admin.showdetails.html'
