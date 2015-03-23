@@ -1,8 +1,8 @@
 (function() {
 
-  angular.module('shows.controller', []).controller('showsCtrl', ['$scope', '$filter', '$location', 'general', showsCtrl]);
+  angular.module('shows.controller', []).controller('showsCtrl', ['$scope', '$filter', '$location', '$state', 'general', showsCtrl]);
 
-  function showsCtrl($scope, $filter, $location, general) {
+  function showsCtrl($scope, $filter, $location, $state, general) {
     var init, query_type;
     $scope.currentPageShows = [];
     $scope.filteredShows = [];
@@ -12,6 +12,8 @@
     $scope.numPerPage = $scope.numPerPageOpt[2];
     $scope.currentPage = 1;
     $scope.currentPageShows = [];
+    $scope.newShow = {};
+    $scope.next = false;
 
     $scope.select = function(page) {
         var end, start;
@@ -40,7 +42,7 @@
 
     // check url to see what type of data we need to query
     query_type = ($location.$$url.indexOf('showhistory') < 0) ? null : 'previous';
-    
+
     general.getScheduledShows(query_type).then(function(data) {
       $scope.shows = data;
       $scope.search();
@@ -50,6 +52,22 @@
         console.log("INIT");
         return $scope.search(), $scope.select($scope.currentPage);
     });
+
+    $scope.validateFirstStep = function() {
+
+      this.nextStep(true);
+    };
+
+    $scope.addNewShow = function(obj) {
+
+
+    };
+
+    $scope.nextStep = function(valid) {
+      $scope.next = (valid) ? true : false;
+    };
+
+
 
   }
 
