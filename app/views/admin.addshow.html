@@ -1,7 +1,181 @@
 <div class="page page-table">
 
-  <section class="panel panel-default table-dynamic">
-    <div class="panel-heading"><strong><i class="fa fa-list panel-ico"></i>Add New Song To Inventory</strong></div>
+  <section class="panel panel-default">
+    <div class="panel-heading"><strong><i class="fa fa-list panel-ico"></i>Schedule New Show</strong></div>
+    <div class="panel-body">
+      <form class="form-horizontal" name="new_show" ng-submit="addNewShow(newShow)">
 
+                    <!--{{new_show.$error}}
+                    <br>
+                    {{new_show.show_name.$error}}
+                    {{new_show.show_name.$dirty}}
+                    <br>
+                    {{new_show.show_date.$error}}
+                    <br>
+                    {{new_show.start_time.$error}}
+                    <br>
+                    {{new_show.end_time.$error}}
+                    <br>
+                    {{new_show.country.$error}}
+                    <br>
+                    {{new_show.state_prov.$error}}
+                    <br>
+                    {{new_show.city.$error}}
+                    <br>-->
+
+          <fieldset ng-show="!next" ng-hide="next">
+            <div class="form-group">
+              <label for="" class="col-sm-2">Show Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" ng-model="newShow.show_name" name="show_name" ng-required="true">
+                <div class="alert alert-danger" ng-show="new_show.show_name.$error.required && new_show.show_name.$dirty">
+                  Enter the show name!
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" data-ng-controller="datepickerCtrl">
+              <label for="ui-datepicker" class="col-sm-2">Scheduled Date</label>
+              <div class="col-sm-4">
+                <div class="input-group ui-datepicker">
+                  <input type="text"
+                         class="form-control"
+                         datepicker-popup="{{format}}"
+                         ng-model="newShow.show_date"
+                         is-open="opened"
+                         min="minDate"
+                         max="'2015-06-22'"
+                         datepicker-options="dateOptions"
+                         date-disabled="disabled(date, mode)"
+                         name="show_date"
+                         ng-required="true"
+                         close-text="Close">
+                  <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
+                </div>
+                <div class="callout-elem-elem callout-elem-elem-info">
+                  <p>Date is: {{dt | date:'fullDate'}}</p>
+                </div>
+              </div>
+            </div>
+
+                    <div class="form-group" data-ng-controller="timepickerCtrl">
+                      <div class="col-sm-6">
+                        <label for="ui-timepicker" class="col-sm-3">Start Time</label>
+                        <div class="col-sm-5">
+                          <div ng-model="newShow.start_time" ng-change="changed()" style="display:inline-block;" name="start_time" ng-required="true">
+                            <timepicker class="ui-timepicker" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                          </div>
+                          <div class="callout-elem-elem callout-elem-elem-info">
+                            <p>Time is: {{mytime | date:'shortTime' }}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <label for="ui-timepicker" class="col-sm-3">End Time</label>
+                        <div class="col-sm-5">
+                          <div ng-model="newShow.end_time" ng-change="changed()" style="display:inline-block;" name="end_time" ng-required="true">
+                            <timepicker class="ui-timepicker" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                          </div>
+                          <div class="callout-elem-elem callout-elem-elem-info">
+                            <p>Time is: {{mytime | date:'shortTime' }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-2">Country</label>
+                      <div class="col-sm-10">
+                        <span class="ui-select">
+                            <select ng-model="newShow.country" name="country" ng-required="true">
+                                <option>Mustard</option>
+                                <option>Ketchup</option>
+                                <option>Barbecue</option>
+                            </select>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-2">State / Providence</label>
+                      <div class="col-sm-10">
+                        <span class="ui-select">
+                            <select ng-model="newShow.state_prov" name="state_prov" ng-required="true">
+                                <option>Mustard</option>
+                                <option>Ketchup</option>
+                                <option>Barbecue</option>
+                            </select>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-2">City</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="newShow.city" name="city" ng-required="true">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-sm-10"></div>
+                      <div class="col-sm-2">
+                        <button class="btn btn-primary" ng-click="nextStep(true)">Create Show Playlist</button>
+                      </div>
+                    </div>
+          </fieldset>
+
+          <fieldset ng-show="next" ng-hide="!next">
+            <div class="form-group">
+              <label class="col-sm-6">Create Show Playlist</label>
+              <div class="col-sm-3">
+                <button class="btn btn-primary"
+                        tooltip="You can select songs from you music inventory.">
+                  Choose Song From Music Inventory
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-6">
+                <input type="text"
+                       ng-model="plsong.artist"
+                       typeahead="artist for artist in artists | filter:$viewValue | limitTo:8"
+                       class="form-control"
+                       placeholder="Artist Name">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-6">
+                <input type="text"
+                       ng-model="plsong.name"
+                       typeahead="song for song in songs | filter:$viewValue | limitTo:8"
+                       class="form-control"
+                       placeholder="Song Name">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3">Song Image (optional)</label>
+              <div class="col-sm-2">
+                <input type="file" title="Choose File" data-ui-file-upload>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-8"></div>
+              <div class="col-sm-2">
+                <button class="btn btn-primary" ng-click="nextStep(false)">
+                  <i class="fa fa-arrow-circle-o-left"></i>
+                  Show Details
+                </button>
+              </div>
+              <div class="col-sm-2">
+                <button class="btn btn-primary" type="submit">Create Show</button>
+              </div>
+            </div>
+          </fieldset>
+      </form>
+    </div>
   </section>
 </div>
