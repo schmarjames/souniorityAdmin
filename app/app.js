@@ -9,6 +9,8 @@ var app = angular.module("app", [
     "app.ui.services",
     "general.service",
     "dashboard.service",
+    "datepicker.controller",
+    "timepicker.controller",
     "app.directives",
     "app.ui.ctrls",
     "app.controllers",
