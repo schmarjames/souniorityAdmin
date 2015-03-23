@@ -94,7 +94,7 @@ module.exports = function(grunt) {
 
         html2js: {
             dist: {
-                src: [ 'app/views/*.html','app/views/charts/*.html','app/views/forms/*.html','app/views/mail/*.html','app/views/maps/*.html','app/views/pages/*.html','app/views/tables/*.html','app/views/tables/*.html','app/views/tasks/*.html','app/views/ui_elements/*.html' ],
+                src: [ 'app/views/*.html', 'app/views/partials/*.html', 'app/views/charts/*.html','app/views/forms/*.html','app/views/mail/*.html','app/views/maps/*.html','app/views/pages/*.html','app/views/tables/*.html','app/views/tables/*.html','app/views/tasks/*.html','app/views/ui_elements/*.html' ],
                 dest: 'tmp/views.js'
             }
         },
