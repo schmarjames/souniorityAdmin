@@ -53,14 +53,14 @@
         return $scope.search(), $scope.select($scope.currentPage);
     });
 
-    $scope.validateFirstStep = function() {
+    $scope.addNewShow = function(obj) {
+      console.log(obj);
+      console.log($scope.new_show.$valid);
 
-      this.nextStep(true);
     };
 
-    $scope.addNewShow = function(obj) {
-
-
+    $scope.addNewPlaylist = function(obj) {
+      console.log(obj);
     };
 
     $scope.nextStep = function(valid) {
