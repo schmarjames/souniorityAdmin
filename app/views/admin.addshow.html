@@ -5,38 +5,21 @@
     <div class="panel-body">
       <form class="form-horizontal" name="new_show" ng-submit="addNewShow(newShow)" ng-show="!next" ng-hide="next" novalidate>
 
-                    {{new_show.$error}}
-                    <br>
-                    {{new_show.show_name.$error}}
-                    {{new_show.show_name.$dirty}}
-                    <br>
-                    {{new_show.show_date.$error}}
-                    <br>
-                    {{new_show.start_time.$error}}
-                    <br>
-                    {{new_show.end_time.$error}}
-                    <br>
-                    {{new_show.country.$error}}
-                    <br>
-                    {{new_show.state_prov.$error}}
-                    <br>
-                    {{new_show.city.$error}}
-                    <br>
             <!-- Show Name -->
             <div class="form-group"
-                 ng-class="{ 'has-error' : new_show.show_name.$invalid && !new_show.show_name.$dirty }">
+                 ng-class="{ 'has-error' : new_show.show_name.$invalid && !new_show.show_name.$pristine }">
               <label for="" class="col-sm-2">Show Name</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" ng-model="newShow.show_name" name="show_name" required>
-                <p ng-show="show_name.show_name.$invalid && !show_name.show_name.$dirty" class="help-block">
+                <p ng-show="new_show.show_name.$invalid && !new_show.show_name.$pristine" class="help-block">
                   The show name is required.
                 </p>
               </div>
             </div>
 
-            <!-- Show Start Date -->
+            <!-- Show Scheduled Date -->
             <div class="form-group"
-                 ng-class="{ 'has-error' : new_show.show_date.$invalid && !new_show.show_date.$dirty}"
+                 ng-class="{ 'has-error' : new_show.show_date.$invalid && !new_show.show_date.$pristine}"
                  data-ng-controller="datepickerCtrl">
               <label for="ui-datepicker" class="col-sm-2">Scheduled Date</label>
               <div class="col-sm-4">
@@ -58,12 +41,13 @@
                 <div class="callout-elem-elem callout-elem-elem-info">
                   <p>Date is: {{dt | date:'fullDate'}}</p>
                 </div>
-                <p ng-show="show_name.show_date.$invalid && !show_name.show_date.$dirty" class="help-block">
+                <p ng-show="new_show.show_date.$invalid && !new_show.show_date.$pristine" class="help-block">
                   Show start date is required.
                 </p>
               </div>
             </div>
 
+                    <!-- Show Start Time -->
                     <div class="form-group" data-ng-controller="timepickerCtrl">
                       <div class="col-sm-6">
                         <label for="ui-timepicker" class="col-sm-3">Start Time</label>
@@ -76,6 +60,8 @@
                           </div>
                         </div>
                       </div>
+
+                      <!-- Show End Time -->
                       <div class="col-sm-6">
                         <label for="ui-timepicker" class="col-sm-3">End Time</label>
                         <div class="col-sm-5">
@@ -89,42 +75,65 @@
                       </div>
                     </div>
 
-                    <div class="form-group">
+                    <!-- Show Street Address -->
+                    <div class="form-group" ng-class="{ 'has-error' : new_show.address.$invalid && !new_show.address.$pristine }">
+                      <label class="col-sm-2">Street Address</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="newShow.address" name="address" required>
+                        <p ng-show="new_show.address.$invalid && !new_show.address.$pristine" class="help-block">
+                          The street address location is required.
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Show Country Destination -->
+                    <div class="form-group" ng-class="{ 'has-error' : new_show.country.$invalid && !new_show.country.$pristine }">
                       <label class="col-sm-2">Country</label>
                       <div class="col-sm-10">
                         <span class="ui-select">
-                            <select ng-model="newShow.country" name="country" ng-required="true">
+                            <select ng-model="newShow.country" name="country" required>
                                 <option>Mustard</option>
                                 <option>Ketchup</option>
                                 <option>Barbecue</option>
                             </select>
                         </span>
+                        <p ng-show="new_show.country.$invalid && !new_show.country.$pristine" class="help-block">
+                          The country location is required.
+                        </p>
                       </div>
                     </div>
 
-                    <div class="form-group">
+                    <!-- Show State / Providence Destination -->
+                    <div class="form-group" ng-class="{ 'has-error' : new_show.state_prov.$invalid && !new_show.state_prov.$pristine }">
                       <label class="col-sm-2">State / Providence</label>
                       <div class="col-sm-10">
                         <span class="ui-select">
-                            <select ng-model="newShow.state_prov" name="state_prov" ng-required="true">
+                            <select ng-model="newShow.state_prov" name="state_prov" required>
                                 <option>Mustard</option>
                                 <option>Ketchup</option>
                                 <option>Barbecue</option>
                             </select>
                         </span>
+                        <p ng-show="new_show.state_prov.$invalid && !new_show.state_prov.$pristine" class="help-block">
+                          The state or providence location is required.
+                        </p>
                       </div>
                     </div>
 
-                    <div class="form-group">
+                    <!-- Show City Destination -->
+                    <div class="form-group" ng-class="{ 'has-error' : new_show.city.$invalid && !new_show.city.$pristine }">
                       <label class="col-sm-2">City</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" ng-model="newShow.city" name="city" ng-required="true">
+                        <input type="text" class="form-control" ng-model="newShow.city" name="city" required>
+                        <p ng-show="new_show.city.$invalid && !new_show.city.$pristine" class="help-block">
+                          The city location is required.
+                        </p>
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <div class="col-sm-10"></div>
-                      <div class="col-sm-2">
+                      <div class="col-sm-9"></div>
+                      <div class="col-sm-3">
                         <button class="btn btn-primary" type="submit" ng-disabled="new_show.$invalid">Create Show Playlist</button>
                       </div>
                     </div>
