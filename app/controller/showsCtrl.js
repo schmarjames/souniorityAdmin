@@ -55,8 +55,9 @@
 
     $scope.addNewShow = function(obj) {
       console.log(obj);
-      console.log($scope.new_show.$valid);
+      if ($scope.new_show.$valid) { return this.nextStep(true); }
 
+      return false;
     };
 
     $scope.addNewPlaylist = function(obj) {
