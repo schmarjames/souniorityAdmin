@@ -18,11 +18,21 @@
           { name: "Amway Center", playlist_size: 18, date: "1/10/15", time: "7pm - 12am", location: "Orlando, FL, USA"}
         ],
         music_inventory = [
-          { name: "Easier To Hide", artist: "Maya Jane Cole" },
-          { name: "Follow You", artist: "Yogi" },
-          { name: "What They Say", artist: "Maya Jane Cole" },
-          { name: "2014 Mix", artist: "Owen Royal" },
-          { name: "Triton", artist: "Seven Lions" }
+          { id: 0, name: "Easier To Hide", artist: "Maya Jane Cole" },
+          { id: 1, name: "Follow You", artist: "Yogi" },
+          { id: 2, name: "What They Say", artist: "Maya Jane Cole" },
+          { id: 3, name: "2014 Mix", artist: "Owen Royal" },
+          { id: 4, name: "Triton", artist: "Seven Lions" },
+          { id: 5, name: "Easier To Hide", artist: "Maya Jane Cole" },
+          { id: 6, name: "Follow You", artist: "Yogi" },
+          { id: 7, name: "What They Say", artist: "Maya Jane Cole" },
+          { id: 8, name: "2014 Mix", artist: "Owen Royal" },
+          { id: 9, name: "Triton", artist: "Seven Lions" },
+          { id: 10, name: "Easier To Hide", artist: "Maya Jane Cole" },
+          { id: 11, name: "Follow You", artist: "Yogi" },
+          { id: 12, name: "What They Say", artist: "Maya Jane Cole" },
+          { id: 13, name: "2014 Mix", artist: "Owen Royal" },
+          { id: 14, name: "Triton", artist: "Seven Lions" }
         ],
         music_media_library = [
           { name: "Easier To Hide", artist: "Maya Jane Cole" },
@@ -79,7 +89,7 @@
      */
 
      function addSongToInventory() {
-       
+
      }
   }
 
