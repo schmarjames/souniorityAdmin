@@ -1,8 +1,8 @@
 (function() {
 
-  angular.module('shows.controller', []).controller('showsCtrl', ['$scope', '$filter', '$location', '$state', 'general', showsCtrl]);
+  angular.module('shows.controller', []).controller('showsCtrl', ['$scope', '$filter', '$location', '$state', '$modal', 'general', showsCtrl]);
 
-  function showsCtrl($scope, $filter, $location, $state, general) {
+  function showsCtrl($scope, $filter, $location, $state, $modal, general) {
     var init, query_type;
     $scope.currentPageShows = [];
     $scope.filteredShows = [];
@@ -68,7 +68,16 @@
       $scope.next = (valid) ? true : false;
     };
 
+    $scope.open = function() {
+      var modalInstance = $modal.open({
+          templateUrl: 'musicInventoryModal.html',
+          controller: 'showsCtrl',
+          size: 'lg',
+          resolve: {
 
+          }
+      });
+    };
 
   }
 
