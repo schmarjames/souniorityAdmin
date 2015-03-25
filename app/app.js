@@ -14,11 +14,12 @@ var app = angular.module("app", [
     "app.directives",
     "app.ui.ctrls",
     "app.controllers",
+    "musicInventoryModalCtrl.controller",
     "dashboard.controller",
     "musicInventory.controller",
     "musicMedia.controller",
     "shows.controller",
-    "app.form.validation", "app.ui.form.ctrls", "app.ui.form.directives", "app.tables", "app.map", "app.task",
+    "checklist-model", "app.form.validation", "app.ui.form.ctrls", "app.ui.form.directives", "app.tables", "app.map", "app.task",
     "app.chart.ctrls", "app.chart.directives","countTo"]).run(["$rootScope", "$location", "$http",
     function ($rootScope, $location, $http) {
 
