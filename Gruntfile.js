@@ -133,6 +133,7 @@ module.exports = function(grunt) {
                     'bower_components/flot/jquery.flot.selection.js',
                     'bower_components/flot/jquery.flot.stack.js',
                     'bower_components/chartjs/Chart.min.js',
+                    'bower_components/checklist-model/checklist-model.js',
                     'bower_components/jquery.sparkline.build/dist/jquery.sparkline.min.js',
                     'bower_components/easypie/dist/angular.easypiechart.min.js',
                     'bower_components/angular-wizard/dist/angular-wizard.js',
