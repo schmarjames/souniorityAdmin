@@ -1,8 +1,8 @@
 (function() {
 
-  angular.module('musicInventory.controller', []).controller('musicInventoryCtrl', ['$scope', '$filter', 'general', musicInventoryCtrl]);
+  angular.module('musicInventory.controller', []).controller('musicInventoryCtrl', ['$scope', '$filter', '$modalInstance', 'general', musicInventoryCtrl]);
 
-  function musicInventoryCtrl($scope, $filter, general) {
+  function musicInventoryCtrl($scope, $filter, $modalInstance, general) {
     var init;
     $scope.currentPageMusic = [];
     $scope.filteredMusic = [];
@@ -12,6 +12,9 @@
     $scope.numPerPage = $scope.numPerPageOpt[2];
     $scope.currentPage = 1;
     $scope.currentPageMusic = [];
+
+    // Music Inventory Modal
+    $scope.selectedSongs = { id: [] };
 
     $scope.select = function(page) {
         var end, start;
@@ -48,6 +51,16 @@
         console.log("INIT");
         return $scope.search(), $scope.select($scope.currentPage);
     });
+
+    // Music Inventory Modal Functions
+    $scope.addToPlaylist = function() {
+      if($scope.selectedSongs.id.length < 0) { return false; }
+      $modalInstance.close($scope.selectedSongs);
+    };
+
+    $scope.cancel = function() {
+      $modalInstance.dismiss('cancel');
+    };
   }
 
 })();

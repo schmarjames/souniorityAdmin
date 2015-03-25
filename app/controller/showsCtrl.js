@@ -3,7 +3,17 @@
   angular.module('shows.controller', []).controller('showsCtrl', ['$scope', '$filter', '$location', '$state', '$modal', 'general', showsCtrl]);
 
   function showsCtrl($scope, $filter, $location, $state, $modal, general) {
-    var init, query_type;
+    var init,
+        query_type,
+        musicItems,
+        modalOptions = {
+          templateUrl: 'app/views/partials/musicInventoryModal.html',
+          controller: 'musicInventoryCtrl',
+          size: 'lg',
+          backdrop: 'static',
+          resolve: {}
+        };
+
     $scope.currentPageShows = [];
     $scope.filteredShows = [];
     $scope.searchKeywords = "";
@@ -14,6 +24,7 @@
     $scope.currentPageShows = [];
     $scope.newShow = {};
     $scope.next = false;
+    $scope.playlistSongs = [];
 
     $scope.select = function(page) {
         var end, start;
@@ -68,17 +79,37 @@
       $scope.next = (valid) ? true : false;
     };
 
-    $scope.open = function() {
-      var modalInstance = $modal.open({
-          templateUrl: 'musicInventoryModal.html',
-          controller: 'showsCtrl',
-          size: 'lg',
-          resolve: {
-
-          }
-      });
+    $scope.openMusicInventory = function() {
+      var modalInstance,
+          success = function(selectedMusic) {
+            //store songs into playlist table
+            listSongs(selectedMusic);
+            },
+          error = function() { console.log("Modal dismissed at: " + new Date()); },
+          listSongs = function(musicIds) {
+            $scope.playlistSongs.push(musicIds);
+          };
+      // see if service gather music items
+      // we only want to do this query once
+      if(!musicItems) {
+        general.getMusicInventory().then(function(data) {
+          musicItems = data;
+          modalOptions.resolve = { item: function() { return musicItems; }};
+          modalInstance = $modal.open(modalOptions);
+          modalInstance.result.then(success, error);
+        });
+        return;
+      }
+      modalOptions.resolve = { item: function() { return musicItems; }};
+      modalInstance = $modal.open(modalOptions);
+      modalInstance.result.then(success, error);
+      return;
     };
 
+  /*  modalInstance.result.then(function(selectedMusic) {
+      console.log(selectedMusic);
+    });
+*/
   }
 
 })();
