@@ -144,7 +144,7 @@
               <label class="col-sm-6">Create Show Playlist</label>
               <div class="col-sm-3">
                 <button class="btn btn-primary"
-                        ng-click="showMusicInventory()"
+                        ng-click="openMusicInventory()"
                         tooltip="You can select songs from you music inventory.">
                   Choose Song From Music Inventory
                 </button>
@@ -176,6 +176,29 @@
               <div class="col-sm-2">
                 <input type="file" title="Choose File" data-ui-file-upload>
               </div>
+            </div>
+
+            <div class="panel-body">
+                <h4>Playlist</h4>
+                {{playlistSongs.length}}
+                {{playlistSongs.length < 0}}
+                <p ng-show="playlistSongs.length < 1">No songs are added to this playlist.</p>
+                <table ng-show="playlistSongs.length > 0" class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Artist</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Table cell</td>
+                            <td>Table cell</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="form-group">
