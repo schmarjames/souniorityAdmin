@@ -3,6 +3,8 @@
   <section class="panel panel-default">
     <div class="panel-heading"><strong><i class="fa fa-list panel-ico"></i>Schedule New Show</strong></div>
     <div class="panel-body">
+
+      <!-- Show Name -->
       <form class="form-horizontal" name="new_show" ng-submit="addNewShow(newShow)" ng-show="!next" ng-hide="next" novalidate>
 
             <!-- Show Name -->
@@ -139,23 +141,23 @@
                     </div>
           </form>
 
-          <form class="form-horizontal" name="new_pl" ng-show="next" ng-hide="!next" ng-submit="addNewPlaylist(new_pl)">
+          <!-- Create Show Playlist Form -->
+          <form class="form-horizontal" name="new_pl" ng-show="next" ng-hide="!next" ng-submit="addNewPlaylist()">
             <div class="form-group">
-              <label class="col-sm-6">Create Show Playlist</label>
+              <label class="col-sm-9">Create Show Playlist</label>
               <div class="col-sm-3">
-                <button class="btn btn-primary"
+                <a class="btn btn-primary"
                         ng-click="openMusicInventory()"
                         tooltip="You can select songs from you music inventory.">
                   Choose Song From Music Inventory
-                </button>
+                </a>
               </div>
             </div>
 
             <div class="form-group">
               <div class="col-sm-6">
                 <input type="text"
-                       ng-model="plsong.artist"
-                       typeahead="artist for artist in artists | filter:$viewValue | limitTo:8"
+                       ng-model="newSong.artist"
                        class="form-control"
                        placeholder="Artist Name">
               </div>
@@ -164,8 +166,7 @@
             <div class="form-group">
               <div class="col-sm-6">
                 <input type="text"
-                       ng-model="plsong.name"
-                       typeahead="song for song in songs | filter:$viewValue | limitTo:8"
+                       ng-model="newSong.name"
                        class="form-control"
                        placeholder="Song Name">
               </div>
@@ -174,14 +175,19 @@
             <div class="form-group">
               <label class="col-sm-3">Song Image (optional)</label>
               <div class="col-sm-2">
-                <input type="file" title="Choose File" data-ui-file-upload>
+                <input type="file" ng-model="newSong.image" title="Choose File" data-ui-file-upload>
               </div>
             </div>
 
+            <div class="form-group">
+              <a class="btn btn-primary" ng-click="addNewSong(newSong)">
+                Add New Song
+              </a>
+            </div>
+
+            <!-- Playlist Table Display -->
             <div class="panel-body">
                 <h4>Playlist</h4>
-                {{playlistSongs.length}}
-                {{playlistSongs.length < 0}}
                 <p ng-show="playlistSongs.length < 1">No songs are added to this playlist.</p>
                 <table ng-show="playlistSongs.length > 0" class="table">
                     <thead>
@@ -192,10 +198,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td></td>
+                        <tr ng-repeat="plsong in playlistSongs">
+                            <td>{{plsong.name}}</td>
+                            <td>{{plsong.artist}}</td>
+                            <td>
+                              <a ng-click="removeFromList(plsong.id)" class="btn btn-primary">Remove</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -210,7 +218,11 @@
                 </button>
               </div>
               <div class="col-sm-2">
-                <button class="btn btn-primary" type="submit">Create Show</button>
+                <button ng-disabled="playlistSongs.length < 1"
+                        class="btn btn-primary"
+                        type="submit">
+                  Create Show
+                </button>
               </div>
             </div>
           </form>

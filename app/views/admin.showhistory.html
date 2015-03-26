@@ -73,7 +73,7 @@
                 <td>{{show.location}}</td>
                 <td>{{show.playlist_size}}</td>
                 <td>
-                  <a ui-sref="#">Details</a>
+                  <a ng-click="displayShowDetails(show.id)" class="btn btn-primary">Details</a>
                 </td>
             </tr>
         </tbody>
