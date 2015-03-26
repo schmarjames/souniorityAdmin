@@ -7,10 +7,16 @@
         query_type,
         musicItems,
         modalOptions = {
-          templateUrl: 'app/views/partials/musicInventoryModal.html',
+          templateUrl: 'app/views/partials/musicinventorymodal.html',
           controller: 'musicInventoryCtrl',
           size: 'lg',
           backdrop: 'static',
+          resolve: {}
+        },
+        historyModalOptions = {
+          templateUrl: 'app/views/partials/showhistorydetails.html',
+          controller: 'showsCtrl',
+          size: 'lg',
           resolve: {}
         };
 
@@ -25,6 +31,8 @@
     $scope.newShow = {};
     $scope.next = false;
     $scope.playlistSongs = [];
+    $scope.newSong = {};
+    $scope.songDetails = "";
 
     $scope.select = function(page) {
         var end, start;
@@ -65,30 +73,47 @@
     });
 
     $scope.addNewShow = function(obj) {
-      console.log(obj);
       if ($scope.new_show.$valid) { return this.nextStep(true); }
 
       return false;
     };
 
-    $scope.addNewPlaylist = function(obj) {
-      console.log(obj);
+    $scope.addNewPlaylist = function() {
+      if ($scope.playlistSongs.length < 0) { return false; }
+      // store new show
+      general.saveShow($scope.newShow, $scope.playlistSongs).then(function(data) {
+        if(data) {
+          $state.go('admin.scheduledshows');
+        }
+      });
     };
 
     $scope.nextStep = function(valid) {
       $scope.next = (valid) ? true : false;
     };
 
+    $scope.displayShowDetails = function(showId) {
+      var modalHistoryInstance;
+      general.getPreviousShow(showId).then(function(data) {
+        songDetails = data;
+        //console.log(songDetails);
+        historyModalOptions.resolve = { item: function() { return songDetails; }};
+        modalHistoryInstance = $modal.open(historyModalOptions);
+      });
+      console.log($scope.songDetails);
+      return;
+    };
+
     $scope.openMusicInventory = function() {
       var modalInstance,
           success = function(selectedMusic) {
             //store songs into playlist table
-            listSongs(selectedMusic);
-            },
-          error = function() { console.log("Modal dismissed at: " + new Date()); },
-          listSongs = function(musicIds) {
-            $scope.playlistSongs.push(musicIds);
-          };
+            angular.forEach(selectedMusic.song, function(key, value) {
+              if($scope.playlistSongs.indexOf(key) > -1) { return; }
+              $scope.playlistSongs.push(key);
+            });
+          },
+          error = function() { console.log("Modal dismissed at: " + new Date()); };
       // see if service gather music items
       // we only want to do this query once
       if(!musicItems) {
@@ -106,10 +131,19 @@
       return;
     };
 
-  /*  modalInstance.result.then(function(selectedMusic) {
-      console.log(selectedMusic);
-    });
-*/
+    $scope.removeFromList = function(songId){
+      angular.forEach($scope.playlistSongs, function(key, value) {
+        if (key.id == songId) {
+          $scope.playlistSongs.splice(value, 1);
+        }
+      });
+    };
+
+    $scope.addNewSong = function(song) {
+      console.log(song);
+      $scope.newSong = null;
+      $scope.playlistSongs.push(song);
+    };
   }
 
 })();

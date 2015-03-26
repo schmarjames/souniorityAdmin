@@ -14,7 +14,7 @@
     $scope.currentPageMusic = [];
 
     // Music Inventory Modal
-    $scope.selectedSongs = { id: [] };
+    $scope.selectedSongs = { song: [] };
 
     $scope.select = function(page) {
         var end, start;
@@ -54,7 +54,7 @@
 
     // Music Inventory Modal Functions
     $scope.addToPlaylist = function() {
-      if($scope.selectedSongs.id.length < 0) { return false; }
+      if($scope.selectedSongs.song.length < 0) { return false; }
       $modalInstance.close($scope.selectedSongs);
     };
 
