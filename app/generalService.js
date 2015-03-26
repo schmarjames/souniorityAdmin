@@ -5,7 +5,9 @@
   function general($http, $q, $timeout) {
     var factory = {
           getScheduledShows : getScheduledShows,
-          getMusicInventory : getMusicInventory
+          getPreviousShow : getPreviousShow,
+          getMusicInventory : getMusicInventory,
+          saveShow : saveShow
         },
         shows = [
           { name: "Babylon Lounge", playlist_size: 12, date: "3/27/15", time: "9pm - 12am", location: "Chicago, IL, USA"},
@@ -13,9 +15,9 @@
           { name: "Amway Center", playlist_size: 18, date: "4/10/15", time: "7pm - 12am", location: "Orlando, FL, USA"}
         ],
         previous_shows = [
-          { name: "Babylon Lounge", playlist_size: 12, date: "2/27/15", time: "9pm - 12am", location: "Chicago, IL, USA"},
-          { name: "Vista Bar and Grill", playlist_size: 26, date: "2/7/15", time: "11pm - 3am", location: "Charlote, NC, USA"},
-          { name: "Amway Center", playlist_size: 18, date: "1/10/15", time: "7pm - 12am", location: "Orlando, FL, USA"}
+          { id: 0, name: "Babylon Lounge", playlist_size: 12, date: "2/27/15", time: "9pm - 12am", location: "Chicago, IL, USA"},
+          { id: 1, name: "Vista Bar and Grill", playlist_size: 26, date: "2/7/15", time: "11pm - 3am", location: "Charlote, NC, USA"},
+          { id: 2, name: "Amway Center", playlist_size: 18, date: "1/10/15", time: "7pm - 12am", location: "Orlando, FL, USA"}
         ],
         music_inventory = [
           { id: 0, name: "Easier To Hide", artist: "Maya Jane Cole" },
@@ -64,6 +66,20 @@
       return deferred.promise;
     }
 
+    function getPreviousShow(id) {
+      var deferred = $q.defer(),
+          song;
+
+      angular.forEach(previous_shows, function(key, value) {
+        if(key.id == id) { song = key; return; }
+      });
+
+      $timeout(function() {
+        deferred.resolve(song);
+      });
+      return deferred.promise;
+    }
+
     function getMusicInventory() {
       var deferred = $q.defer();
 
@@ -90,6 +106,15 @@
 
      function addSongToInventory() {
 
+     }
+
+     function saveShow(showObj, playlistObj) {
+       var deferred = $q.defer();
+       $timeout(function() {
+         deferred.resolve(true);
+       }, 500);
+
+       return deferred.promise;
      }
   }
 
