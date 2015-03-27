@@ -7,6 +7,7 @@ var app = angular.module("app", [
     "ngRoute", "ui.router", "ngAnimate", "ui.bootstrap", "easypiechart",
     "mgo-angular-wizard", "textAngular", "ui.tree", "ngMap", "ngTagsInput",
     "app.ui.services",
+    "user.service",
     "general.service",
     "dashboard.service",
     "datepicker.controller",
@@ -16,6 +17,8 @@ var app = angular.module("app", [
     "app.controllers",
     "musicInventoryModal.controller",
     "showHistoryModal.controller",
+    "showRemovalModal.controller",
+    "songRemovalModal.controller",
     "dashboard.controller",
     "musicInventory.controller",
     "musicMedia.controller",
@@ -61,7 +64,7 @@ console.log($stateProvider);
         })
 
         .state('admin.addshow', {
-          url: '/addshow',
+          url: '/addshow/{id:[0-9]{1,8}}',
           templateUrl: 'app/views/admin.addshow.html',
           controller: 'showsCtrl'
         })
@@ -80,6 +83,12 @@ console.log($stateProvider);
         .state('admin.musicinventory', {
           url: '/musicinventory',
           templateUrl: 'app/views/admin.musicinventory.html',
+          controller: 'musicInventoryCtrl'
+        })
+
+        .state('admin.addsong', {
+          url: '/addshow/{id:[0-9]{1,8}}',
+          templateUrl: 'app/views/admin.addsong.html',
           controller: 'musicInventoryCtrl'
         })
 
