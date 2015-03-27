@@ -8,14 +8,14 @@
         musicItems,
         modalOptions = {
           templateUrl: 'app/views/partials/musicinventorymodal.html',
-          controller: 'musicInventoryCtrl',
+          controller: 'musicInventoryModalCtrl',
           size: 'lg',
           backdrop: 'static',
           resolve: {}
         },
         historyModalOptions = {
           templateUrl: 'app/views/partials/showhistorydetails.html',
-          controller: 'showsCtrl',
+          controller: 'showHistoryModalCtrl',
           size: 'lg',
           resolve: {}
         };
@@ -32,7 +32,6 @@
     $scope.next = false;
     $scope.playlistSongs = [];
     $scope.newSong = {};
-    $scope.songDetails = "";
 
     $scope.select = function(page) {
         var end, start;
@@ -100,7 +99,6 @@
         historyModalOptions.resolve = { item: function() { return songDetails; }};
         modalHistoryInstance = $modal.open(historyModalOptions);
       });
-      console.log($scope.songDetails);
       return;
     };
 
@@ -119,13 +117,13 @@
       if(!musicItems) {
         general.getMusicInventory().then(function(data) {
           musicItems = data;
-          modalOptions.resolve = { item: function() { return musicItems; }};
+          //modalOptions.resolve = { item: function() { return musicItems; }};
           modalInstance = $modal.open(modalOptions);
           modalInstance.result.then(success, error);
         });
         return;
       }
-      modalOptions.resolve = { item: function() { return musicItems; }};
+      //modalOptions.resolve = { item: function() { return musicItems; }};
       modalInstance = $modal.open(modalOptions);
       modalInstance.result.then(success, error);
       return;
