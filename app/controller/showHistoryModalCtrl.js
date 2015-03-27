@@ -4,6 +4,7 @@
 
   function showHistoryModalCtrl($scope, $modalInstance, general, item) {
     console.log(item);
+    $scope.showDetails = item;
   }
 
 })();

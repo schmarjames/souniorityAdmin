@@ -18,6 +18,13 @@
           controller: 'showHistoryModalCtrl',
           size: 'lg',
           resolve: {}
+        },
+        removeShowModalOptions = {
+          templateUrl: 'app/views/partials/removeshowmodal.html',
+          controller: 'showRemovalModalCtrl',
+          size: 'lg',
+          backdrop: 'static',
+          resolve: {}
         };
 
     $scope.currentPageShows = [];
@@ -141,6 +148,15 @@
       console.log(song);
       $scope.newSong = null;
       $scope.playlistSongs.push(song);
+    };
+
+    $scope.removeShow = function(show) {
+      removeShowModalOptions.resolve = { item: function() { return show; }};
+      modalInstance = $modal.open(removeShowModalOptions);
+      modalInstance.result.then(function(shows) {
+        $scope.shows = shows;
+        $scope.search();
+      }, function() {});
     };
   }
 
