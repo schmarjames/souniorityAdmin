@@ -7,12 +7,14 @@
           getScheduledShows : getScheduledShows,
           getPreviousShow : getPreviousShow,
           getMusicInventory : getMusicInventory,
-          saveShow : saveShow
+          saveShow : saveShow,
+          deleteShow : deleteShow,
+          deleteSong : deleteSong
         },
         shows = [
-          { name: "Babylon Lounge", playlist_size: 12, date: "3/27/15", time: "9pm - 12am", location: "Chicago, IL, USA"},
-          { name: "Vista Bar and Grill", playlist_size: 26, date: "4/7/15", time: "11pm - 3am", location: "Charlote, NC, USA"},
-          { name: "Amway Center", playlist_size: 18, date: "4/10/15", time: "7pm - 12am", location: "Orlando, FL, USA"}
+          { id: 0, name: "Babylon Lounge", playlist_size: 12, date: "3/27/15", time: "9pm - 12am", location: "Chicago, IL, USA"},
+          { id: 1, name: "Vista Bar and Grill", playlist_size: 26, date: "4/7/15", time: "11pm - 3am", location: "Charlote, NC, USA"},
+          { is: 2, name: "Amway Center", playlist_size: 18, date: "4/10/15", time: "7pm - 12am", location: "Orlando, FL, USA"}
         ],
         previous_shows = [
           { id: 0, name: "Babylon Lounge", playlist_size: 12, date: "2/27/15", time: "9pm - 12am", location: "Chicago, IL, USA"},
@@ -104,8 +106,13 @@
      * Form post / get methods
      */
 
-     function addSongToInventory() {
+     function addSongToInventory(songObj) {
+       var deferred = $q.defer();
+       $timeout(function() {
+         deferred.resolve(true);
+       }, 500);
 
+       return deferred.promise;
      }
 
      function saveShow(showObj, playlistObj) {
@@ -113,6 +120,38 @@
        $timeout(function() {
          deferred.resolve(true);
        }, 500);
+
+       return deferred.promise;
+     }
+
+     function deleteShow(showId) {
+       var deferred = $q.defer();
+
+       angular.forEach(shows, function(key, value) {
+         if (key.id == showId) {
+           shows.splice(value, 1);
+         }
+       });
+
+       $timeout(function() {
+         deferred.resolve(shows);
+       });
+
+       return deferred.promise;
+     }
+
+     function deleteSong(songId) {
+       var deferred = $q.defer();
+
+       angular.forEach(music_inventory, function(key, value) {
+         if (key.id == songId) {
+           music_inventory.splice(value, 1);
+         }
+       });
+
+       $timeout(function() {
+         deferred.resolve(music_inventory);
+       });
 
        return deferred.promise;
      }
