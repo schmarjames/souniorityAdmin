@@ -6,7 +6,7 @@
     <div class="table-filters">
         <div class="row">
             <div class="col-sm-4 col-xs-6">
-                <form>
+                <form ng-show="shows.length > 0">
                     <input type="text"
                            placeholder="search"
                            class="form-control"
@@ -14,7 +14,7 @@
                            data-ng-keyup="search()">
                 </form>
             </div>
-            <div class="col-sm-3 col-xs-6 filter-result-info">
+            <div class="col-sm-3 col-xs-6 filter-result-info" ng-show="shows.length > 0">
                 <span>
                     Showing {{filteredShow.length}}/{{shows.length}} entries
                 </span>
@@ -25,7 +25,9 @@
         </div>
     </div>
 
-    <table class="table table-bordered table-striped table-responsive">
+    <p class="col-md-6" ng-show="shows.length == 0"><strong>You do not have any shows scheduled.</strong></p>
+
+    <table class="table table-bordered table-striped table-responsive" ng-show="shows.length > 0">
         <thead>
             <tr>
                 <th><div class="th">
@@ -85,14 +87,14 @@
                 <td>{{show.location}}</td>
                 <td>{{show.playlist_size}}</td>
                 <td>
-                  <a ui-sref="#">Edit</a>
-                  <a ui-sref="#">Remove</a>
+                  <a ui-sref="admin.addshow({id: show.id})"  class="btn btn-primary">Edit</a>
+                  <a ng-click="removeShow(show)" class="btn btn-primary">Remove</a>
                 </td>
             </tr>
         </tbody>
     </table>
 
-    <footer class="table-footer">
+    <footer class="table-footer"  ng-show="shows.length > 0">
         <div class="row">
             <div class="col-md-6 page-num-info">
                 <span>

@@ -6,7 +6,7 @@
     <div class="table-filters">
         <div class="row">
             <div class="col-sm-4 col-xs-6">
-                <form>
+                <form ng-show="music.length > 0">
                     <input type="text"
                            placeholder="search"
                            class="form-control"
@@ -15,7 +15,7 @@
                 </form>
             </div>
             <div class="col-sm-3 col-xs-6 filter-result-info">
-                <span>
+                <span ng-show="music.length > 0">
                     Music {{filteredMusic.length}}/{{music.length}} entries
                 </span>
             </div>
@@ -25,7 +25,9 @@
         </div>
     </div>
 
-    <table class="table table-bordered table-striped table-responsive">
+    <p class="col-md-6" ng-show="music.length == 0"><strong>You do not have music in your inventory.</strong></p>
+
+    <table class="table table-bordered table-striped table-responsive" ng-show="music.length > 0">
         <thead>
             <tr>
                 <th><div class="th">
@@ -55,14 +57,14 @@
                 <td>{{music.name}}</td>
                 <td>{{music.artist}}</td>
                 <td>
-                  <a ui-sref="#">Edit</a>
-                  <a ui-sref="#">Remove</a>
+                  <a ui-sref="admin.addsong({id: music.id})"  class="btn btn-primary">Edit</a>
+                  <a ng-click="removeSong(music)" class="btn btn-primary">Remove</a>
                 </td>
             </tr>
         </tbody>
     </table>
 
-    <footer class="table-footer">
+    <footer class="table-footer" ng-show="music.length > 0">
         <div class="row">
             <div class="col-md-6 page-num-info">
                 <span>

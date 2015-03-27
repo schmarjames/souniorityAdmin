@@ -3,7 +3,7 @@
   <section class="panel panel-default table-dynamic">
     <div class="panel-heading"><strong><i class="fa fa-list panel-ico"></i>Show History</strong></div>
 
-    <div class="table-filters">
+    <div class="table-filters" ng-show="shows.length > 0">
         <div class="row">
             <div class="col-sm-4 col-xs-6">
                 <form>
@@ -22,7 +22,9 @@
         </div>
     </div>
 
-    <table class="table table-bordered table-striped table-responsive">
+    <p ng-show="shows.length == 0"><strong>You do not have any previous shows within you timeline.</strong></p>
+
+    <table class="table table-bordered table-striped table-responsive" ng-show="shows.length > 0">
         <thead>
             <tr>
                 <th><div class="th">
@@ -61,6 +63,15 @@
                           data-ng-click=" order('-location') "
                           data-ng-class="{active: row == '-location'}"></span>
                 </div></th>
+                <th><div class="th">
+                    Playlist Size
+                    <span class="glyphicon glyphicon-chevron-up"
+                          data-ng-click=" order('location') "
+                          data-ng-class="{active: row == 'location'}"></span>
+                    <span class="glyphicon glyphicon-chevron-down"
+                          data-ng-click=" order('-location') "
+                          data-ng-class="{active: row == '-location'}"></span>
+                </div></th>
                 <th></th>
             </tr>
         </thead>
@@ -79,7 +90,7 @@
         </tbody>
     </table>
 
-    <footer class="table-footer">
+    <footer class="table-footer" ng-show="shows.length == 0">
         <div class="row">
             <div class="col-md-6 page-num-info">
                 <span>

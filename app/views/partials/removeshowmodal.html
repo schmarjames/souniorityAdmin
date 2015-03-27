@@ -1,0 +1,19 @@
+<div class="page page-table">
+  <section class="panel panel-default table-dynamic">
+    <div class="panel-heading"><strong><i class="fa fa-list panel-ico"></i>Remove / Unschedule Show</strong></div>
+
+    <form class="form-horizontal" ng-submit="deleteShow(show.id)">
+      <div class="form-group">
+        <div class="container-fluid">
+          <p><strong>Are you sure you want to delete this show?</strong></p>
+          <p>Number of fans anticipating this show: </p>
+          <p><em>Fans who are watching for this show will be notified of cancellation.</em></p>
+        </div>
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-primary">Yes</button>
+          <a ng-click="cancel()" class="btn btn-primary">No</a>
+        </div>
+      </div>
+    </form>
+  </section>
+</div>
