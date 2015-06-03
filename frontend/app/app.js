@@ -15,6 +15,7 @@ var app = angular.module("app", [
     "app.directives",
     "app.ui.ctrls",
     "app.controllers",
+    "signUp.controller",
     "musicInventoryModal.controller",
     "showHistoryModal.controller",
     "showRemovalModal.controller",
@@ -120,7 +121,8 @@ console.log($stateProvider);
 
         .state('signup', {
           url: '/signup',
-          templateUrl: 'app/views/signup.html'
+          templateUrl: 'app/views/signup.html',
+          controller: 'signUpCtrl'
         })
 
         .state('logout', {

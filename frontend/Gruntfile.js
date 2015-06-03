@@ -160,7 +160,8 @@ module.exports = function(grunt) {
             server: {
                 options: {
                     hostname: 'localhost',
-                    port: 8888
+                    port: 8888,
+		    keepalive: true
                 }
             }
         },
@@ -168,7 +169,7 @@ module.exports = function(grunt) {
         watch: {
             dev: {
                 files: [ 'Gruntfile.js', 'app/*.js', 'app/controller/*.js', '*.html','styles/*.scss' ],
-                tasks: [ 'jshint','html2js:dist','copy:main', 'concat:dist', 'clean:temp','cssmin' ],
+                tasks: [ 'jshint','html2js:dist','copy:main', 'concat:dist', 'clean:temp','cssmin', 'connect:server:keepalive' ],
                 options: {
                     atBegin: true
                 }
